@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class NameSort {
@@ -30,7 +29,7 @@ public class NameSort {
 
     public static void main(String[] args) {
 
-        // 1. sort array using anonymous inner class
+        // sort array using anonymous inner class
         Name[] copy = Arrays.copyOf(NAMES, NAMES.length);
         Arrays.sort(copy, new Comparator<Name>() {
             @Override
@@ -40,12 +39,12 @@ public class NameSort {
         });
         printNames("Names sorted with anonymous inner class:", copy);
 
-        // 2. sort array using lambda expression
+        // sort array using lambda expression
         copy = Arrays.copyOf(NAMES, NAMES.length);
         Arrays.sort(copy, (a, b) -> a.compareTo(b));
         printNames("Names sorted with lambda expression:", copy);
         
-        // 3. use predicate composition to remove matching names
+        // use predicate composition to remove matching names
         List<Name> list = new ArrayList<>();
         for (Name name : NAMES) {
             list.add(name);
@@ -55,7 +54,7 @@ public class NameSort {
         list.removeIf(pred1.or(pred2));
         printNames("Names filtered by predicate:", list.toArray(new Name[list.size()]));
 
-        // 4. sort array using key extractor lambdas
+        // sort array using key extractor lambdas
         copy = Arrays.copyOf(NAMES, NAMES.length);
         Comparator<Name> comp = Comparator.comparing(name -> name.lastName);
         comp = comp.thenComparing(name -> name.firstName);
@@ -63,10 +62,10 @@ public class NameSort {
         printNames("Names sorted with key extractor comparator:", copy);
         
         // but this gives compilator errors for incompatible types, even with cast
-//        Comparator<Name> comp = Comparator.comparing(name1 -> name1.lastName)
+//        Comparator<Name> com1 = Comparator.comparing(name1 -> name1.lastName)
 //            .thenComparing(name2 -> name2.firstName);
 
-        // 5. sort array using existing methods as lambdas
+        // sort array using existing methods as lambdas
         copy = Arrays.copyOf(NAMES, NAMES.length);
         comp = Comparator.comparing(Name::getLastName).thenComparing(Name::getFirstName);
         Arrays.sort(copy, comp);

@@ -1,6 +1,6 @@
 package com.sosnoski.lambdaintro;
 
-public class Name implements Comparable<Name> {
+public class Name {
     public final String firstName;
     public final String lastName;
 
@@ -19,7 +19,6 @@ public class Name implements Comparable<Name> {
         return lastName;
     }
 
-    @Override
     // only needed for direct comparator (not for chained comparator)
     public int compareTo(Name other) {
         int diff = lastName.compareTo(other.lastName);
